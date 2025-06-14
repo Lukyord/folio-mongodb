@@ -10,6 +10,7 @@ import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
 import { FixedToolbarFeature, HeadingFeature, lexicalEditor } from '@payloadcms/richtext-lexical'
 import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
+import { gcsStorage } from '@payloadcms/storage-gcs'
 
 import { Page, Post } from '@/payload-types'
 import { getServerSideURL } from '@/utilities/getURL'
@@ -91,4 +92,24 @@ export const plugins: Plugin[] = [
     },
   }),
   payloadCloudPlugin(),
+  gcsStorage({
+    collections: {
+      media: {
+        prefix: 'payload-media',
+      },
+    },
+
+    bucket: process.env.GCS_BUCKET || '',
+    options: {
+      apiEndpoint: process.env.GCS_ENDPOINT,
+      projectId: process.env.GCS_PROJECT_ID,
+      credentials: {
+        project_id: 'folio-462303',
+        private_key_id: process.env.GCS_PRIVATE_KEY_ID,
+        private_key: process.env.GCS_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+        client_email: process.env.GCS_CLIENT_EMAIL,
+        client_id: '113383120774366486361',
+      },
+    },
+  }),
 ]
