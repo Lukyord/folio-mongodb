@@ -1,8 +1,5 @@
 import type { Metadata } from 'next'
 
-import { cn } from '@/utilities/ui'
-import { GeistMono } from 'geist/font/mono'
-import { GeistSans } from 'geist/font/sans'
 import React from 'react'
 
 import { AdminBar } from '@/components/AdminBar'
@@ -12,31 +9,61 @@ import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
-
+import localFont from 'next/font/local'
+import '@/styles/theme.css'
+import '@/styles/theme-rwd.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+
+const NeueBit = localFont({
+  src: './fonts/NeueBit/NeueBit-Regular.woff2',
+  weight: '400',
+  style: 'normal',
+  variable: '--font-bit',
+})
+
+const NeueMontreal = localFont({
+  src: [
+    {
+      path: './fonts/NeueMontreal/NeueMontreal-Light.woff2',
+      weight: '300',
+      style: 'light',
+    },
+    {
+      path: './fonts/NeueMontreal/NeueMontreal-Regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './fonts/NeueMontreal/NeueMontreal-Medium.woff2',
+      weight: '500',
+      style: 'medium',
+    },
+    {
+      path: './fonts/NeueMontreal/NeueMontreal-Bold.woff2',
+      weight: '700',
+      style: 'bold',
+    },
+  ],
+  variable: '--font-body',
+})
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const { isEnabled } = await draftMode()
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="en" suppressHydrationWarning>
+    <html
+      className={`${NeueBit.variable} ${NeueMontreal.variable}`}
+      lang="en"
+      suppressHydrationWarning
+    >
       <head>
         <InitTheme />
-        <link href="/favicon.ico" rel="icon" sizes="32x32" />
-        <link href="/favicon.svg" rel="icon" type="image/svg+xml" />
       </head>
       <body>
         <Providers>
-          <AdminBar
-            adminBarProps={{
-              preview: isEnabled,
-            }}
-          />
-
           <Header />
           {children}
-          <Footer />
         </Providers>
       </body>
     </html>

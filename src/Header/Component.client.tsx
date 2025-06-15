@@ -30,12 +30,25 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   return (
-    <header className="container relative z-20   " {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-8 flex justify-between">
+    <header id="header" {...(theme ? { 'data-theme': theme } : {})}>
+      <div className="header-nav">
         <Link href="/">
-          <Logo loading="eager" priority="high" className="invert dark:invert-0" />
+          {/* <Logo loading="eager" priority="high" className="invert dark:invert-0" /> */}
+          <p>
+            T<span className="font-bit">ana</span>b<span className="font-bit">or</span>dee Tan
+            <span className="font-bit">s</span>i<span className="font-bit">r</span>i
+          </p>
         </Link>
-        <HeaderNav data={data} />
+
+        <ul className="menu">
+          {data.navItems &&
+            data.navItems.map((item) => (
+              <li key={item.id}>
+                <Link href={item.link.url || ''}>{item.link.label}</Link>
+              </li>
+            ))}
+        </ul>
+        {/* <HeaderNav data={data} /> */}
       </div>
     </header>
   )
