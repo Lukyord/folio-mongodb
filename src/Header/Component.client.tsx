@@ -6,9 +6,6 @@ import React, { useEffect, useState } from 'react'
 
 import type { Header } from '@/payload-types'
 
-import { Logo } from '@/components/Logo/Logo'
-import { HeaderNav } from './Nav'
-
 interface HeaderClientProps {
   data: Header
 }
@@ -33,7 +30,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
     <header id="header" {...(theme ? { 'data-theme': theme } : {})}>
       <div className="header-nav">
         <Link href="/">
-          {/* <Logo loading="eager" priority="high" className="invert dark:invert-0" /> */}
           <p>
             T<span className="font-bit">ana</span>b<span className="font-bit">or</span>dee Tan
             <span className="font-bit">s</span>i<span className="font-bit">r</span>i
@@ -48,7 +44,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
               </li>
             ))}
         </ul>
-        {/* <HeaderNav data={data} /> */}
       </div>
     </header>
   )

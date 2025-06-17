@@ -2,13 +2,11 @@ import type { Metadata } from 'next'
 
 import React from 'react'
 
-import { AdminBar } from '@/components/AdminBar'
-import { Footer } from '@/Footer/Component'
 import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
-import { draftMode } from 'next/headers'
+// import { draftMode } from 'next/headers'
 import localFont from 'next/font/local'
 import '@/styles/theme.css'
 import '@/styles/theme-rwd.css'
@@ -49,7 +47,7 @@ const NeueMontreal = localFont({
 })
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const { isEnabled } = await draftMode()
+  // const { isEnabled } = await draftMode()
 
   return (
     <html

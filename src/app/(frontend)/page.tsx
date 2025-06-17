@@ -1,8 +1,13 @@
-import PageTemplate, { generateMetadata } from './[slug]/page'
+import FloatingShape from '@/components/FloatingShape/FloatingShape'
+// import PageTemplate, { generateMetadata } from './[slug]/page'
 
 export default function Home() {
   return (
-    <div style={{ paddingTop: '500px', height: '200vh' }}>
+    <main className="index-main">
+      <section data-section="floating-shape">
+        <FloatingShape />
+      </section>
+
       <h1
         style={{
           fontSize: '40px',
@@ -13,6 +18,6 @@ export default function Home() {
       <p style={{ fontFamily: 'var(--font-bit)', fontSize: '40px' }}>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
       </p>
-    </div>
+    </main>
   )
 }
