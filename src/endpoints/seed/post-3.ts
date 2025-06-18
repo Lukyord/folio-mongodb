@@ -10,6 +10,16 @@ export const post3: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     slug: 'dollar-and-sense-the-financial-forecast',
     _status: 'published',
     authors: [author],
+    projectName: [
+      {
+        word: 'Digital',
+        image: heroImage.id,
+      },
+      {
+        word: 'Horizons',
+        image: blockImage.id,
+      },
+    ],
     content: {
       root: {
         type: 'root',

@@ -10,6 +10,16 @@ export const post2: (args: PostArgs) => RequiredDataFromCollectionSlug<'posts'> 
     slug: 'global-gaze',
     _status: 'published',
     authors: [author],
+    projectName: [
+      {
+        word: 'Digital',
+        image: heroImage.id,
+      },
+      {
+        word: 'Horizons',
+        image: blockImage.id,
+      },
+    ],
     content: {
       root: {
         type: 'root',
