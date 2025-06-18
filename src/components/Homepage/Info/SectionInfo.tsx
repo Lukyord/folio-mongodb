@@ -11,44 +11,24 @@ export default function SectionInfo() {
     <section data-section="info">
       <div className="sc-billboard full-screen">
         <div className="content">
-          <SplitTextComponent
-            as="h1"
-            className="size-h1"
-            enableScrollAnimation={true}
-            animationClass="letter-in"
-          >
+          <SplitTextComponent as="h1" enableScrollAnimation={true} animationClass="letter-in">
             Tana<span className="font-bit">bord</span>ee <span className="font-bit">Tans</span>iri
           </SplitTextComponent>
 
-          <SplitTextComponent
-            as="p"
-            className="size-h1"
-            enableScrollAnimation={true}
-            animationClass="letter-in"
-          >
+          <SplitTextComponent as="p" enableScrollAnimation={true} animationClass="letter-in">
             <span className="font-bit">C</span>r<span className="font-bit">ea</span>ative Fr
             <span className="font-bit">on</span>t<span className="font-bit">end</span> De
             <span className="font-bit">v</span>elo<span className="font-bit">p</span>e
             <span className="font-bit">r</span>
           </SplitTextComponent>
 
-          <SplitTextComponent
-            as="p"
-            className="size-h1"
-            enableScrollAnimation={true}
-            animationClass="letter-in"
-          >
+          <SplitTextComponent as="p" enableScrollAnimation={true} animationClass="letter-in">
             <span className="font-bit">Cu</span>rr<span className="font-bit">en</span>tly{' '}
             <span className="font-bit">@</span>
             <span className="font-rusilla">P</span>laimanas
           </SplitTextComponent>
 
-          <SplitTextComponent
-            as="p"
-            className="size-h1"
-            enableScrollAnimation={true}
-            animationClass="letter-in"
-          >
+          <SplitTextComponent as="p" enableScrollAnimation={true} animationClass="letter-in">
             <span className="font-bit">Ba</span>se
             <span className="font-bit">d</span> <span className="font-bit">in</span>{' '}
             <span className="font-bit">B</span>an

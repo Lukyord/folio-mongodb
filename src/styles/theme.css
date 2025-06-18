@@ -2504,4 +2504,6 @@ section {
   justify-content: center;
   align-items: center;
   height: 100%;
+  font-size: var(--font-size-h1);
+  line-height: var(--line-height-h1);
 }
