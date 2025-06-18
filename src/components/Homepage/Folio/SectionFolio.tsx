@@ -1,6 +1,8 @@
 import React from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
+import Link from 'next/link'
+import Image from 'next/image'
 
 export default async function SectionFolio() {
   const payload = await getPayload({ config: configPromise })
@@ -21,6 +23,7 @@ export default async function SectionFolio() {
       tags: true,
       createdAt: true,
       publishedAt: true,
+      projectName: true,
       meta: true,
     },
   })
@@ -64,9 +67,24 @@ export default async function SectionFolio() {
                   </div>
 
                   <div className="project">
-                    <a href={`/posts/${post.slug}`}>
-                      <p>{post.title}</p>
-                    </a>
+                    <Link href={`/posts/${post.slug}`} className="project-name">
+                      {post.projectName && Array.isArray(post.projectName)
+                        ? post.projectName.map((item: any, index: number) => (
+                            <div key={index} className="word-item">
+                              <div className="image">
+                                <Image
+                                  src={item.image.url}
+                                  alt={item.word}
+                                  width={item.image.width}
+                                  height={item.image.height}
+                                />
+                              </div>
+
+                              <p className="word">{item.word}</p>
+                            </div>
+                          ))
+                        : post.title}
+                    </Link>
                   </div>
                 </div>
               )

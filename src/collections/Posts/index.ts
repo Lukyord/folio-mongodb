@@ -42,6 +42,10 @@ export const Posts: CollectionConfig<'posts'> = {
     title: true,
     slug: true,
     categories: true,
+    tags: true,
+    projectName: {
+      image: true,
+    },
     meta: {
       image: true,
       description: true,
@@ -73,6 +77,33 @@ export const Posts: CollectionConfig<'posts'> = {
       name: 'title',
       type: 'text',
       required: true,
+    },
+    {
+      name: 'projectName',
+      type: 'array',
+      required: true,
+      admin: {
+        description: 'Add each word of your project name with its own image',
+      },
+      fields: [
+        {
+          name: 'word',
+          type: 'text',
+          required: true,
+          admin: {
+            description: 'Enter a single word (no spaces)',
+          },
+        },
+        {
+          name: 'image',
+          type: 'upload',
+          relationTo: 'media',
+          required: true,
+          admin: {
+            description: 'Upload an image for this word',
+          },
+        },
+      ],
     },
     {
       type: 'tabs',

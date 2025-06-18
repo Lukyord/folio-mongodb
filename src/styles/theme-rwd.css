@@ -102,6 +102,35 @@
     font-size: var(--font-size-h4);
     line-height: var(--line-height-h4);
   }
+
+  /* Folio */
+  [data-section='folio'] .table-row .category {
+    width: 0;
+    overflow: hidden;
+  }
+
+  [data-section='folio'] .table-row .year {
+    width: 20%;
+  }
+
+  [data-section='folio'] .table-row .project {
+    width: 80%;
+  }
+
+  [data-section='folio'] .project-name {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-h3);
+    gap: var(--spacing-3xs);
+  }
+
+  [data-section='folio'] .word-item .image {
+    --height: calc(var(--font-size-h3) * var(--line-height-h3));
+  }
+
+  [data-section='folio'] .table-row:hover .word-item .image {
+    width: 0;
+    margin-right: 0;
+  }
 }
 
 @media (max-width: 575px) {

@@ -216,6 +216,20 @@ export interface Page {
 export interface Post {
   id: string;
   title: string;
+  /**
+   * Add each word of your project name with its own image
+   */
+  projectName: {
+    /**
+     * Enter a single word (no spaces)
+     */
+    word: string;
+    /**
+     * Upload an image for this word
+     */
+    image: string | Media;
+    id?: string | null;
+  }[];
   heroImage?: (string | null) | Media;
   content: {
     root: {
@@ -1154,6 +1168,13 @@ export interface FormBlockSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  projectName?:
+    | T
+    | {
+        word?: T;
+        image?: T;
+        id?: T;
+      };
   heroImage?: T;
   content?: T;
   relatedPosts?: T;
