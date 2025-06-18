@@ -10,7 +10,6 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import localFont from 'next/font/local'
 import '@/styles/theme.css'
 import '@/styles/theme-rwd.css'
-import 'animate.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 

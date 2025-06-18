@@ -2,6 +2,7 @@
 
 import React from 'react'
 import { SplitTextComponent } from '../../../utils/splitText'
+
 export default function SectionInfo() {
   return (
     <section data-section="info">
