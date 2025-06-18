@@ -10,6 +10,7 @@ import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import localFont from 'next/font/local'
 import '@/styles/theme.css'
 import '@/styles/theme-rwd.css'
+import 'animate.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
 
@@ -47,7 +48,7 @@ const NeueMontreal = localFont({
 })
 
 const RusillaSerif = localFont({
-  src: './fonts/RusillaSerif/RusillaSerif-Regular.woff2',
+  src: './fonts/RusillaSerif/Rusillaserif-Regular.woff2',
   weight: '400',
   style: 'normal',
   variable: '--font-rusilla',
