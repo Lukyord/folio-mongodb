@@ -46,12 +46,19 @@ const NeueMontreal = localFont({
   variable: '--font-body',
 })
 
+const RusillaSerif = localFont({
+  src: './fonts/RusillaSerif/RusillaSerif-Regular.woff2',
+  weight: '400',
+  style: 'normal',
+  variable: '--font-rusilla',
+})
+
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   // const { isEnabled } = await draftMode()
 
   return (
     <html
-      className={`${NeueBit.variable} ${NeueMontreal.variable}`}
+      className={`${NeueBit.variable} ${NeueMontreal.variable} ${RusillaSerif.variable}`}
       lang="en"
       suppressHydrationWarning
     >

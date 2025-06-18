@@ -1,4 +1,5 @@
-import FloatingShape from '@/components/FloatingShape/FloatingShape'
+import FloatingShape from '@/components/Homepage/FloatingShape/FloatingShape'
+import SectionInfo from '@/components/Homepage/Info/SectionInfo'
 // import PageTemplate, { generateMetadata } from './[slug]/page'
 
 export default function Home() {
@@ -8,16 +9,7 @@ export default function Home() {
         <FloatingShape />
       </section>
 
-      <h1
-        style={{
-          fontSize: '40px',
-        }}
-      >
-        Neue Montreal
-      </h1>
-      <p style={{ fontFamily: 'var(--font-bit)', fontSize: '40px' }}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-      </p>
+      <SectionInfo />
     </main>
   )
 }
