@@ -71,6 +71,7 @@ export interface Config {
     posts: Post;
     media: Media;
     categories: Category;
+    tags: Tag;
     users: User;
     redirects: Redirect;
     forms: Form;
@@ -87,6 +88,7 @@ export interface Config {
     posts: PostsSelect<false> | PostsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    tags: TagsSelect<false> | TagsSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     forms: FormsSelect<false> | FormsSelect<true>;
@@ -232,6 +234,7 @@ export interface Post {
   };
   relatedPosts?: (string | Post)[] | null;
   categories?: (string | Category)[] | null;
+  tags?: (string | Tag)[] | null;
   meta?: {
     title?: string | null;
     /**
@@ -241,6 +244,14 @@ export interface Post {
     description?: string | null;
   };
   publishedAt?: string | null;
+  /**
+   * Date when this post was created
+   */
+  createdAt: string;
+  /**
+   * Toggle to show or hide this post from public view
+   */
+  isVisible?: boolean | null;
   authors?: (string | User)[] | null;
   populatedAuthors?:
     | {
@@ -251,7 +262,6 @@ export interface Post {
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
-  createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
@@ -365,6 +375,22 @@ export interface Category {
         id?: string | null;
       }[]
     | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags".
+ */
+export interface Tag {
+  id: string;
+  name: string;
+  /**
+   * Enter a hex color code (e.g., #FF5733) or CSS color name
+   */
+  color: string;
+  slug?: string | null;
+  slugLock?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -918,6 +944,10 @@ export interface PayloadLockedDocument {
         value: string | Category;
       } | null)
     | ({
+        relationTo: 'tags';
+        value: string | Tag;
+      } | null)
+    | ({
         relationTo: 'users';
         value: string | User;
       } | null)
@@ -1128,6 +1158,7 @@ export interface PostsSelect<T extends boolean = true> {
   content?: T;
   relatedPosts?: T;
   categories?: T;
+  tags?: T;
   meta?:
     | T
     | {
@@ -1136,6 +1167,8 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
+  createdAt?: T;
+  isVisible?: T;
   authors?: T;
   populatedAuthors?:
     | T
@@ -1146,7 +1179,6 @@ export interface PostsSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
-  createdAt?: T;
   _status?: T;
 }
 /**
@@ -1260,6 +1292,18 @@ export interface CategoriesSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "tags_select".
+ */
+export interface TagsSelect<T extends boolean = true> {
+  name?: T;
+  color?: T;
+  slug?: T;
+  slugLock?: T;
   updatedAt?: T;
   createdAt?: T;
 }

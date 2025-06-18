@@ -100,7 +100,7 @@
   --spacing-4xs: 0.8rem;
   --spacing-5xs: 0.6rem;
   --container-max-width-xl: 188rem;
-  --spacing-container: var(--spacing-xs);
+  --spacing-container: var(--spacing-lg);
   --gap-section: var(--spacing-4xl);
 
   --hamburger-size: 3.6rem;
@@ -2506,4 +2506,35 @@ section {
   height: 100%;
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
+}
+
+/* Folio */
+[data-section='folio'] {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+[data-section='folio'] .table-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 0.1rem solid var(--color-white);
+}
+
+[data-section='folio'] .table-row.table-header {
+  font-size: var(--font-size-h6);
+  padding: var(--spacing-sm) 0;
+}
+
+[data-section='folio'] .table-row .category {
+  width: 20%;
+}
+
+[data-section='folio'] .table-row .year {
+  width: 12.5%;
+}
+
+[data-section='folio'] .table-row .project {
+  width: 67.5%;
 }

@@ -48,7 +48,7 @@ export const Posts: CollectionConfig<'posts'> = {
     },
   },
   admin: {
-    defaultColumns: ['title', 'slug', 'updatedAt'],
+    defaultColumns: ['title', 'slug', 'tags', 'updatedAt'],
     livePreview: {
       url: ({ data, req }) => {
         const path = generatePreviewPath({
@@ -132,6 +132,15 @@ export const Posts: CollectionConfig<'posts'> = {
               hasMany: true,
               relationTo: 'categories',
             },
+            {
+              name: 'tags',
+              type: 'relationship',
+              admin: {
+                position: 'sidebar',
+              },
+              hasMany: true,
+              relationTo: 'tags',
+            },
           ],
           label: 'Meta',
         },
@@ -182,6 +191,37 @@ export const Posts: CollectionConfig<'posts'> = {
             return value
           },
         ],
+      },
+    },
+    {
+      name: 'createdAt',
+      type: 'date',
+      admin: {
+        date: {
+          pickerAppearance: 'dayAndTime',
+        },
+        position: 'sidebar',
+        description: 'Date when this post was created',
+      },
+      hooks: {
+        beforeChange: [
+          ({ value }) => {
+            // If no value is set, use current date
+            if (!value) {
+              return new Date()
+            }
+            return value
+          },
+        ],
+      },
+    },
+    {
+      name: 'isVisible',
+      type: 'checkbox',
+      defaultValue: true,
+      admin: {
+        position: 'sidebar',
+        description: 'Toggle to show or hide this post from public view',
       },
     },
     {

@@ -1,5 +1,6 @@
 import FloatingShape from '@/components/Homepage/FloatingShape/FloatingShape'
 import SectionInfo from '@/components/Homepage/Info/SectionInfo'
+import SectionFolio from '@/components/Homepage/Folio/SectionFolio'
 import { Header } from '@/Header/Component'
 // import PageTemplate, { generateMetadata } from './[slug]/page'
 
@@ -14,7 +15,7 @@ export default function Home() {
 
         <SectionInfo />
 
-        <section style={{ height: '100vh' }}></section>
+        <SectionFolio />
       </main>
     </>
   )

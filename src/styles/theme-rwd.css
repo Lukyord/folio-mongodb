@@ -84,6 +84,12 @@
     display: none !important;
   }
 
+  :root {
+    --spacing-container: var(--spacing-xs);
+  }
+
+  /* PAGE */
+  /* PAGE: INDEX */
   /* Info */
   [data-section='info'] {
     width: 100%;
