@@ -2030,6 +2030,30 @@ html.no-touchevents *[class*='swiper-button-']:hover:after {
   animation-duration: 1s;
 }
 
+@keyframes letter-in {
+  0% {
+    transform: rotate3d(1, -0.3, 0, 90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate3d(0, 0, 0, 90deg);
+    opacity: 1;
+  }
+}
+
+.char {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  transform-origin: center center 0.4em;
+  opacity: 0;
+}
+
+.letter-in {
+  animation: letter-in 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  animation-delay: calc(var(--char-index) * 0.03s + 0.28s);
+}
+
 .lenis {
   height: auto;
 }
