@@ -682,6 +682,10 @@ strong {
   font-family: var(--font-bit) !important;
   font-size: 1.2em;
 }
+.font-rusilla {
+  font-family: var(--font-rusilla) !important;
+  font-size: 1.44em;
+}
 .style-italic {
   font-style: italic !important;
 }
@@ -869,6 +873,62 @@ html.no-touchevents *:is(.button, .wp-element-button, .wp-block-button__link):ho
   --button-hover-bg: var(--color-white);
   --button-color: var(--color-white);
   --button-hover-color: var(--color-green1);
+}
+
+.button-flip {
+  position: relative;
+  display: inline-block;
+  --rgb: var(--color-black-rgb);
+}
+
+.white .button-flip {
+  --rgb: var(--color-white-rgb);
+}
+
+.button-flip span {
+  display: block;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(var(--rgb), 1);
+  transition: var(--duration-x2) var(--timing-function);
+}
+
+.button-flip:hover span {
+  width: 100%;
+}
+
+.button-flip::after {
+  top: 0;
+  left: 0;
+  opacity: 0;
+  width: 100%;
+  display: block;
+  transition: var(--duration-x2) var(--timing-function);
+  position: absolute;
+  content: attr(data-back);
+  transform: translateY(-50%) rotateX(90deg);
+}
+
+.button-flip::before {
+  top: 0;
+  left: 0;
+  opacity: 1;
+  display: block;
+  transition: var(--duration-x2) var(--timing-function);
+  position: relative;
+  content: attr(data-front);
+  transform: translateY(0) rotateX(0);
+}
+
+.button-flip:hover::before {
+  opacity: 0;
+  transform: translateY(50%) rotateX(90deg);
+}
+
+.button-flip:hover::after {
+  opacity: 1;
+  transform: translateY(0) rotateX(0);
 }
 
 /* GENERAL ====================*/
@@ -2142,6 +2202,10 @@ html.touchevents a {
   left: 0;
   width: 100%;
   z-index: 100;
+}
+
+#header.white .header-nav a {
+  color: var(--color-white);
 }
 
 .header-nav {

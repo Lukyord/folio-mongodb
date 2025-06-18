@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 
 import React from 'react'
 
-import { Header } from '@/Header/Component'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
@@ -66,10 +65,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <InitTheme />
       </head>
       <body>
-        <Providers>
-          <Header />
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   )

@@ -40,7 +40,14 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           {data.navItems &&
             data.navItems.map((item) => (
               <li key={item.id}>
-                <Link href={item.link.url || ''}>{item.link.label}</Link>
+                <Link
+                  href={item.link.url || ''}
+                  className="button-flip"
+                  data-front={item.link.label}
+                  data-back={item.link.label}
+                >
+                  <span>{item.link.label}</span>
+                </Link>
               </li>
             ))}
         </ul>

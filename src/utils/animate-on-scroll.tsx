@@ -15,8 +15,6 @@ type AnimateOnScrollProps = {
   start?: string
   end?: string
   toggleActions?: string
-  threshold?: number
-  rootMargin?: string
   once?: boolean
   onEnter?: () => void
   onLeave?: () => void
@@ -31,8 +29,6 @@ export default function AnimateOnScroll({
   start = 'top 80%',
   end = 'bottom 20%',
   toggleActions = 'play none none reverse',
-  threshold = 0.1,
-  rootMargin = '0px',
   once = true,
   onEnter,
   onLeave,

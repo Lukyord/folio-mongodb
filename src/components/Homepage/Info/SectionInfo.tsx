@@ -2,38 +2,57 @@
 
 import React from 'react'
 import { SplitTextComponent } from '../../../utils/splitText'
-import AnimateOnScroll from '@/utils/animate-on-scroll'
+import { useHeaderScrollClass } from '../../../utils/useHeaderScrollClass'
 
 export default function SectionInfo() {
+  useHeaderScrollClass()
+
   return (
     <section data-section="info">
       <div className="sc-billboard full-screen">
         <div className="content">
           <SplitTextComponent
             as="h1"
-            style={{ fontSize: '40px', marginBottom: '2rem' }}
+            className="size-h1"
             enableScrollAnimation={true}
             animationClass="letter-in"
           >
-            Neue Montreal
+            Tana<span className="font-bit">bord</span>ee <span className="font-bit">Tans</span>iri
           </SplitTextComponent>
 
           <SplitTextComponent
             as="p"
-            style={{ fontFamily: 'var(--font-bit)', fontSize: '40px', marginBottom: '2rem' }}
+            className="size-h1"
             enableScrollAnimation={true}
             animationClass="letter-in"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+            <span className="font-bit">C</span>r<span className="font-bit">ea</span>ative Fr
+            <span className="font-bit">on</span>t<span className="font-bit">end</span> De
+            <span className="font-bit">v</span>elo<span className="font-bit">p</span>e
+            <span className="font-bit">r</span>
           </SplitTextComponent>
 
           <SplitTextComponent
             as="p"
-            style={{ fontFamily: 'var(--font-rusilla)', fontSize: '40px' }}
+            className="size-h1"
             enableScrollAnimation={true}
             animationClass="letter-in"
           >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+            <span className="font-bit">Cu</span>rr<span className="font-bit">en</span>tly{' '}
+            <span className="font-bit">@</span>
+            <span className="font-rusilla">P</span>laimanas
+          </SplitTextComponent>
+
+          <SplitTextComponent
+            as="p"
+            className="size-h1"
+            enableScrollAnimation={true}
+            animationClass="letter-in"
+          >
+            <span className="font-bit">Ba</span>se
+            <span className="font-bit">d</span> <span className="font-bit">in</span>{' '}
+            <span className="font-bit">B</span>an
+            <span className="font-bit">g</span>k<span className="font-bit">o</span>k
           </SplitTextComponent>
         </div>
       </div>
