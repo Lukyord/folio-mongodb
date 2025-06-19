@@ -2684,4 +2684,9 @@ section {
   font-size: var(--font-size-button);
   line-height: var(--line-height-button);
   font-weight: var(--font-weight-semibold);
+  transition: var(--duration) var(--timing-function);
+}
+
+[data-section='post'] .post-tag:hover {
+  transform: translateY(-1rem);
 }
