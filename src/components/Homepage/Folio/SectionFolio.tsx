@@ -1,8 +1,7 @@
 import React from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
-import Link from 'next/link'
-import Image from 'next/image'
+import TableRow from './TableRow'
 
 export default async function SectionFolio() {
   const payload = await getPayload({ config: configPromise })
@@ -47,48 +46,9 @@ export default async function SectionFolio() {
               </div>
             </div>
 
-            {posts.docs.map((post) => {
-              const year = post.createdAt ? new Date(post.createdAt).getFullYear() : 'Unknown'
-
-              const categories = post.categories
-                ? Array.isArray(post.categories)
-                  ? post.categories.map((cat: any) => cat?.title || 'Unknown').join(', ')
-                  : (post.categories as any)?.title || 'Unknown'
-                : 'Uncategorized'
-
-              return (
-                <div key={post.id} className="table-row">
-                  <div className="category">
-                    <p>{categories}</p>
-                  </div>
-
-                  <div className="year">
-                    <p>{year}</p>
-                  </div>
-
-                  <div className="project">
-                    <Link href={`/posts/${post.slug}`} className="project-name">
-                      {post.projectName && Array.isArray(post.projectName)
-                        ? post.projectName.map((item: any, index: number) => (
-                            <div key={index} className="word-item">
-                              <div className="image">
-                                <Image
-                                  src={item.image.url}
-                                  alt={item.word}
-                                  width={item.image.width}
-                                  height={item.image.height}
-                                />
-                              </div>
-
-                              <p className="word">{item.word}</p>
-                            </div>
-                          ))
-                        : post.title}
-                    </Link>
-                  </div>
-                </div>
-              )
-            })}
+            {posts.docs.map((post) => (
+              <TableRow key={post.id} post={post} />
+            ))}
           </div>
         </div>
       </div>

@@ -2538,17 +2538,25 @@ section {
 }
 
 [data-section='folio'] .table-row {
+  --transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-lg) 0;
   border-bottom: 0.1rem solid var(--color-white);
+  position: relative;
+  overflow: hidden;
 }
 
 [data-section='folio'] .table-row.table-header {
   font-size: var(--font-size-h6);
   padding: var(--spacing-sm) 0;
+}
+
+[data-section='folio'] .table-row > * {
+  position: relative;
+  z-index: 1;
 }
 
 [data-section='folio'] .table-row .category {
@@ -2561,6 +2569,23 @@ section {
 
 [data-section='folio'] .table-row .project {
   width: 67.5%;
+}
+
+[data-section='folio'] .table-row .category-inhouse {
+  color: #8dc4ff;
+  transition: var(--duration) var(--timing-function);
+}
+
+[data-section='folio'] .table-row .category-freelance {
+  color: #ffb98d;
+  transition: var(--duration) var(--timing-function);
+}
+
+[data-section='folio'] .table-row .category {
+  transition: var(--transition);
+}
+[data-section='folio'] .table-row:not(.table-header):hover .category {
+  margin-left: var(--spacing-2xs);
 }
 
 [data-section='folio'] .project-name {
@@ -2581,7 +2606,7 @@ section {
   height: var(--height);
   width: 0;
   overflow: hidden;
-  transition: var(--duration-x2) cubic-bezier(0.22, 1, 0.36, 1);
+  transition: var(--transition);
 }
 
 [data-section='folio'] .word-item .image img {
@@ -2592,6 +2617,28 @@ section {
 [data-section='folio'] .table-row:hover .word-item .image {
   width: calc(var(--height) * 1.5);
   margin-right: var(--spacing-3xs);
+}
+
+[data-section='folio'] .table-row:not(.table-header) > .table-row-background {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-white);
+  transform: translateY(-100%);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-section='folio'] .table-row:not(.table-header):hover {
+  color: var(--color-black);
+}
+
+[data-section='folio'] .table-row:not(.table-header):hover .category-inhouse {
+  color: #2d6fb5;
+}
+
+[data-section='folio'] .table-row:not(.table-header):hover .category-freelance {
+  color: #b86735;
 }
 
 /* PAGE: POST */
