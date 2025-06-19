@@ -131,6 +131,36 @@
     width: 0;
     margin-right: 0;
   }
+
+  /* PAGE: POST */
+  /* Post */
+  [data-section='post'] .post-header {
+    --small-width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    row-gap: var(--spacing-sm);
+  }
+
+  [data-section='post'] .post-header .post-ttl {
+    width: 100%;
+    grid-column: 1 / 3;
+    grid-row: 2;
+    text-align: left;
+  }
+
+  [data-section='post'] .post-header .back-button-link {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  [data-section='post'] .post-header .post-date {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  [data-section='post'] .content {
+    max-width: unset;
+  }
 }
 
 @media (max-width: 575px) {

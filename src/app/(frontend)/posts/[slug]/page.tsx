@@ -10,11 +10,10 @@ import RichText from '@/components/RichText'
 
 import type { Post } from '@/payload-types'
 
-import { PostHero } from '@/heros/PostHero'
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-
+import Link from 'next/link'
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const posts = await payload.find({
@@ -49,29 +48,76 @@ export default async function Post({ params: paramsPromise }: Args) {
 
   if (!post) return <PayloadRedirects url={url} />
 
+  const categories = post.categories
+    ? Array.isArray(post.categories)
+      ? post.categories.map((cat: any) => cat?.title || 'Unknown').join(' / ')
+      : (post.categories as any)?.title || 'Unknown'
+    : 'Uncategorized'
+
   return (
-    <article className="pt-16 pb-16">
-      <PageClient />
+    <main className="post-main">
+      <section data-section="post">
+        <div className="sc-inner sc-inner--top-0">
+          <div className="container">
+            {/* Allows redirects for valid pages too */}
+            <PayloadRedirects disableNotFound url={url} />
 
-      {/* Allows redirects for valid pages too */}
-      <PayloadRedirects disableNotFound url={url} />
+            {draft && <LivePreviewListener />}
 
-      {draft && <LivePreviewListener />}
+            <div className="post-header">
+              <Link href="/" className="back-button-link">
+                Back
+              </Link>
 
-      <PostHero post={post} />
+              <div className="post-ttl">
+                <h1>{post.title}</h1>
+              </div>
 
-      <div className="flex flex-col items-center gap-4 pt-8">
-        <div className="container">
-          <RichText className="max-w-[48rem] mx-auto" data={post.content} enableGutter={false} />
-          {post.relatedPosts && post.relatedPosts.length > 0 && (
-            <RelatedPosts
-              className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
-              docs={post.relatedPosts.filter((post) => typeof post === 'object')}
-            />
-          )}
+              <div className="post-date">
+                <p>
+                  {new Date(post.createdAt).toLocaleDateString('en-US', {
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                </p>
+              </div>
+            </div>
+
+            <div className="content">
+              <div className="post-category">
+                <h2 className="size-h4">{categories}</h2>
+              </div>
+
+              <div className="post-tags">
+                {post.tags?.map((item) => {
+                  const tag = typeof item === 'string' ? item : item.name
+                  const tagColor = typeof item === 'string' ? item : item.color
+
+                  return (
+                    <div
+                      style={{ '--bg': tagColor } as React.CSSProperties}
+                      className="post-tag"
+                      key={tag}
+                    >
+                      <span>{tag}</span>
+                    </div>
+                  )
+                })}
+              </div>
+
+              <RichText data={post.content} enableGutter={false} />
+              {post.relatedPosts && post.relatedPosts.length > 0 && (
+                <RelatedPosts
+                  className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"
+                  docs={post.relatedPosts.filter((post) => typeof post === 'object')}
+                />
+              )}
+            </div>
+          </div>
         </div>
-      </div>
-    </article>
+      </section>
+      <PageClient />
+    </main>
   )
 }
 

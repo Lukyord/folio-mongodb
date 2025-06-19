@@ -7,7 +7,7 @@ import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import React from 'react'
 import PageClient from './page.client'
-
+import { redirect } from 'next/navigation'
 export const dynamic = 'force-static'
 export const revalidate = 600
 
@@ -26,6 +26,9 @@ export default async function Page() {
       meta: true,
     },
   })
+
+  //redirect to home page
+  redirect('/')
 
   return (
     <div className="pt-24 pb-24">
@@ -49,7 +52,7 @@ export default async function Page() {
 
       <div className="container">
         {posts.totalPages > 1 && posts.page && (
-          <Pagination page={posts.page} totalPages={posts.totalPages} />
+          <Pagination page={posts.page || 1} totalPages={posts.totalPages} />
         )}
       </div>
     </div>

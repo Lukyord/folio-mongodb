@@ -66,6 +66,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <Providers>{children}</Providers>
+
+        <div id="page-message">
+          <p>
+            For the best experience, we recommend viewing the site in portrait orientation on mobile
+            devices.
+          </p>
+        </div>
       </body>
     </html>
   )
