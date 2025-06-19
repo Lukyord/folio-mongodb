@@ -2527,8 +2527,18 @@ section {
   justify-content: center;
   align-items: center;
   height: 100%;
+  width: 100%;
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+}
+
+[data-section='info'] .canvas-3d {
+  position: absolute;
+  inset: 0;
 }
 
 /* Folio */

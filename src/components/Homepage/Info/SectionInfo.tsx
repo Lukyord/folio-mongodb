@@ -3,13 +3,15 @@
 import React from 'react'
 import { SplitTextComponent } from '../../../utils/splitText'
 import { useHeaderScrollClass } from '../../../utils/useHeaderScrollClass'
-
+import Background3d from './Background3d'
 export default function SectionInfo() {
   useHeaderScrollClass()
 
   return (
     <section data-section="info">
       <div className="sc-billboard full-screen">
+        <Background3d />
+
         <div className="content">
           <SplitTextComponent as="h1" enableScrollAnimation={true} animationClass="letter-in">
             Tana<span className="font-bit">bord</span>ee <span className="font-bit">Tans</span>iri

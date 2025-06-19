@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sort Of Flower
+* source:	https://sketchfab.com/3d-models/sort-of-flower-333aed4b4a4f4c5e931d6b84ac475761
+* author:	jwilson32 (https://sketchfab.com/jwilson32)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sort Of Flower" (https://sketchfab.com/3d-models/sort-of-flower-333aed4b4a4f4c5e931d6b84ac475761) by jwilson32 (https://sketchfab.com/jwilson32) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

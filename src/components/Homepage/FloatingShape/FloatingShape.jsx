@@ -5,43 +5,20 @@ import { Environment } from '@react-three/drei'
 import Flower from './Flower'
 import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
-
-// Custom hook to detect screen size
-const useScreenSize = () => {
-  const [screenSize, setScreenSize] = useState({
-    width: typeof window !== 'undefined' ? window.innerWidth : 1920,
-    height: typeof window !== 'undefined' ? window.innerHeight : 1080,
-  })
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreenSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      })
-    }
-
-    if (typeof window !== 'undefined') {
-      window.addEventListener('resize', handleResize)
-      return () => window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  return screenSize
-}
+import { useScreenSize } from '@/hooks/useScreenSize'
 
 // Helper function to get responsive scales and positions
 const getResponsiveProps = (screenWidth) => {
   if (screenWidth < 768) {
     // Mobile screens
     return {
-      scales: [1, 0.65, 0.5],
+      scales: [1, 0.65, 0.5, 1.5],
       positions: [0, 0, 0],
       cameraZoom: 400,
     }
   } else {
     return {
-      scales: [1.2, 0.85, 0.7],
+      scales: [1.2, 0.85, 0.7, 1.75],
       positions: [0, 0, 0],
       cameraZoom: 500,
     }
@@ -85,7 +62,7 @@ export default function FloatingShape() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 3)
+      setActiveIndex((prev) => (prev + 1) % 4)
     }, 2000)
 
     return () => clearInterval(interval)
@@ -131,6 +108,17 @@ export default function FloatingShape() {
           responsiveProps.positions[2],
         ]}
         visible={activeIndex === 2}
+      />
+      <Flower
+        ref={(el) => (flowersRef.current[3] = el)}
+        modelPath="/3d/flower-poppy.gltf"
+        scale={[responsiveProps.scales[3], responsiveProps.scales[3], responsiveProps.scales[3]]}
+        position={[
+          responsiveProps.positions[0],
+          responsiveProps.positions[1],
+          responsiveProps.positions[2],
+        ]}
+        visible={activeIndex === 3}
       />
       <Environment preset="sunset" />
     </Canvas>
