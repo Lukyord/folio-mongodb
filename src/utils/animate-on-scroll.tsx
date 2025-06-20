@@ -11,11 +11,12 @@ if (typeof window !== 'undefined') {
 type AnimateOnScrollProps = {
   children: ReactNode
   className?: string
-  triggerClass?: string
+  triggerClass?: string | string[]
   start?: string
   end?: string
   toggleActions?: string
   once?: boolean
+  delay?: number
   onEnter?: () => void
   onLeave?: () => void
   onEnterBack?: () => void
@@ -30,6 +31,7 @@ export default function AnimateOnScroll({
   end = 'bottom 20%',
   toggleActions = 'play none none reverse',
   once = true,
+  delay = 0,
   onEnter,
   onLeave,
   onEnterBack,
@@ -37,10 +39,45 @@ export default function AnimateOnScroll({
 }: AnimateOnScrollProps) {
   const elementRef = useRef<HTMLDivElement>(null)
 
+  // Helper function to add classes
+  const addClasses = (element: HTMLElement, classes: string | string[]) => {
+    if (Array.isArray(classes)) {
+      classes.forEach((cls) => element.classList.add(cls))
+    } else {
+      element.classList.add(classes)
+    }
+  }
+
+  // Helper function to remove classes
+  const removeClasses = (element: HTMLElement, classes: string | string[]) => {
+    if (Array.isArray(classes)) {
+      classes.forEach((cls) => element.classList.remove(cls))
+    } else {
+      element.classList.remove(classes)
+    }
+  }
+
+  // Helper function to show element with classes
+  const showElement = (element: HTMLElement, callback?: () => void) => {
+    element.style.visibility = 'visible'
+    addClasses(element, triggerClass)
+    callback?.()
+  }
+
+  // Helper function to hide element and remove classes
+  const hideElement = (element: HTMLElement, callback?: () => void) => {
+    if (!once) {
+      element.style.visibility = 'hidden'
+      removeClasses(element, triggerClass)
+    }
+    callback?.()
+  }
+
   useEffect(() => {
     const element = elementRef.current
     if (!element) return
 
+    // Initial setup
     element.style.visibility = 'hidden'
     element.classList.add('animate')
 
@@ -50,30 +87,27 @@ export default function AnimateOnScroll({
       end,
       toggleActions,
       onEnter: () => {
-        element.style.visibility = 'visible'
-        element.classList.add(triggerClass)
-        onEnter?.()
+        if (delay) {
+          setTimeout(() => showElement(element, onEnter), delay)
+        } else {
+          showElement(element, onEnter)
+        }
       },
       onLeave: () => {
-        if (!once) {
-          element.style.visibility = 'hidden'
-          element.classList.remove(triggerClass)
-        }
-        onLeave?.()
+        hideElement(element, onLeave)
       },
       onEnterBack: () => {
         if (!once) {
-          element.style.visibility = 'visible'
-          element.classList.add(triggerClass)
+          if (delay) {
+            setTimeout(() => showElement(element), delay)
+          } else {
+            showElement(element)
+          }
         }
         onEnterBack?.()
       },
       onLeaveBack: () => {
-        if (!once) {
-          element.style.visibility = 'hidden'
-          element.classList.remove(triggerClass)
-        }
-        onLeaveBack?.()
+        hideElement(element, onLeaveBack)
       },
     })
 
@@ -81,7 +115,20 @@ export default function AnimateOnScroll({
     return () => {
       scrollTrigger.kill()
     }
-  }, [triggerClass, start, end, toggleActions, once, onEnter, onLeave, onEnterBack, onLeaveBack])
+  }, [
+    triggerClass,
+    start,
+    end,
+    toggleActions,
+    once,
+    delay,
+    onEnter,
+    onLeave,
+    onEnterBack,
+    onLeaveBack,
+    hideElement,
+    showElement,
+  ])
 
   return (
     <div ref={elementRef} className={className}>

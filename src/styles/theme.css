@@ -2139,6 +2139,21 @@ html.no-touchevents *[class*='swiper-button-']:hover:after {
   opacity: 0;
 }
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeInUp {
+  animation: fadeInUp 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
 .letter-in {
   animation: letter-in 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
   animation-delay: calc(var(--char-index) * 0.03s + 0.28s);
@@ -2515,8 +2530,6 @@ section {
 
 /* Info */
 [data-section='info'] {
-  width: 100%;
-  height: 100vh;
   background-color: var(--color-black);
   color: var(--color-white);
 }
@@ -2541,6 +2554,89 @@ section {
   inset: 0;
 }
 
+@keyframes float-1 {
+  from {
+    transform: translate3d(-2rem, -2.5rem, 0) rotate(2deg);
+  }
+  to {
+    transform: translate3d(0.5rem, 0.5rem, 0) rotate(-2deg);
+  }
+}
+
+@keyframes float-2 {
+  from {
+    transform: translate3d(-1.5rem, -1rem, 0) rotate(-2deg);
+  }
+  to {
+    transform: translate3d(0.5rem, -1.5rem, 0) rotate(2deg);
+  }
+}
+
+@keyframes float-3 {
+  from {
+    transform: translate3d(-0.5rem, -1.5rem, 0) rotate(2deg);
+  }
+  to {
+    transform: translate3d(0.5rem, -0.5rem, 0) rotate(-2deg);
+  }
+}
+
+[data-section='info'] .blob {
+  position: absolute;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+[data-section='info'] .blob img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+[data-section='info'] .blob[data-blob='1'] {
+  width: 29.2361111111vw;
+  aspect-ratio: 0.786701209;
+  top: 0;
+  left: -5%;
+  transform: translateY(-15%);
+  animation-name: float-1;
+  animation-direction: alternate;
+  animation-delay: 0s;
+}
+
+[data-section='info'] .blob[data-blob='2'] {
+  width: 22.8333333333vw;
+  aspect-ratio: 0.786701209;
+  bottom: 0;
+  left: 0;
+  animation-name: float-3;
+  animation-direction: alternate;
+  animation-delay: 0.25s;
+}
+
+[data-section='info'] .blob[data-blob='3'] {
+  width: 27.833333vw;
+  aspect-ratio: 1.02171136654;
+  top: 0;
+  right: -5%;
+  animation-name: float-2;
+  animation-direction: alternate;
+  animation-delay: 0.45s;
+}
+
+[data-section='info'] .blob[data-blob='4'] {
+  width: 24.833333vw;
+  aspect-ratio: 0.93875;
+  bottom: 0;
+  right: -5%;
+  animation-name: float-1;
+  animation-direction: alternate;
+  animation-delay: 0.45s;
+}
+
 /* Folio */
 [data-section='folio'] {
   background-color: var(--color-black);
@@ -2548,15 +2644,29 @@ section {
 }
 
 [data-section='folio'] .table-row {
-  --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  --transition: 1s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: var(--spacing-xs);
   padding: var(--spacing-lg) 0;
-  border-bottom: 0.1rem solid var(--color-white);
   position: relative;
   overflow: hidden;
+}
+
+[data-section='folio'] .table-row:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0.1rem;
+  background-color: var(--color-white);
+  transition: var(--transition);
+}
+
+[data-section='folio'] .in-view > .table-row:after {
+  width: 100%;
 }
 
 [data-section='folio'] .table-row.table-header {

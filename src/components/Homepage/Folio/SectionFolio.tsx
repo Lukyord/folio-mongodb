@@ -2,6 +2,7 @@ import React from 'react'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import TableRow from './TableRow'
+import AnimateOnScroll from '@/utils/animate-on-scroll'
 
 export default async function SectionFolio() {
   const payload = await getPayload({ config: configPromise })
@@ -32,19 +33,21 @@ export default async function SectionFolio() {
       <div className="sc-inner">
         <div className="container">
           <div className="content">
-            <div className="table-row table-header">
-              <div className="category">
-                <p>Category</p>
-              </div>
+            <AnimateOnScroll triggerClass={['fadeInUp', 'in-view']} delay={100}>
+              <div className="table-row table-header">
+                <div className="category">
+                  <p>Category</p>
+                </div>
 
-              <div className="year">
-                <p>Year</p>
-              </div>
+                <div className="year">
+                  <p>Year</p>
+                </div>
 
-              <div className="project">
-                <p>Project</p>
+                <div className="project">
+                  <p>Project</p>
+                </div>
               </div>
-            </div>
+            </AnimateOnScroll>
 
             {posts.docs.map((post) => (
               <TableRow key={post.id} post={post} />

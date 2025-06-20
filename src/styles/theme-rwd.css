@@ -92,10 +92,12 @@
   /* PAGE: INDEX */
   /* Info */
   [data-section='info'] {
-    width: 100%;
-    height: 100vh;
     background-color: var(--color-black);
     color: var(--color-white);
+  }
+
+  [data-section='info'] .sc-billboard.full-screen {
+    height: 50vh;
   }
 
   [data-section='info'] .sc-billboard .content > * {

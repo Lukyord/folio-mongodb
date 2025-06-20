@@ -4,6 +4,7 @@ import React, { useRef, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import CategoryList from './CategoryList'
+import AnimateOnScroll from '@/utils/animate-on-scroll'
 
 interface TableRowProps {
   post: {
@@ -76,44 +77,46 @@ export default function TableRow({ post }: TableRowProps) {
   }, [])
 
   return (
-    <div
-      ref={rowRef}
-      className="table-row"
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div className="category">
-        <p>
-          <CategoryList categories={categories} />
-        </p>
-      </div>
+    <AnimateOnScroll triggerClass={['fadeInUp', 'in-view']} delay={100}>
+      <div
+        ref={rowRef}
+        className="table-row"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="category">
+          <p>
+            <CategoryList categories={categories} />
+          </p>
+        </div>
 
-      <div className="year">
-        <p>{year}</p>
-      </div>
+        <div className="year">
+          <p>{year}</p>
+        </div>
 
-      <div className="project">
-        <Link href={`/posts/${post.slug}`} className="project-name">
-          {post.projectName && Array.isArray(post.projectName)
-            ? post.projectName.map((item: any, index: number) => (
-                <div key={index} className="word-item">
-                  <div className="image">
-                    <Image
-                      src={item.image.url}
-                      alt={item.word}
-                      width={item.image.width}
-                      height={item.image.height}
-                    />
+        <div className="project">
+          <Link href={`/posts/${post.slug}`} className="project-name">
+            {post.projectName && Array.isArray(post.projectName)
+              ? post.projectName.map((item: any, index: number) => (
+                  <div key={index} className="word-item">
+                    <div className="image">
+                      <Image
+                        src={item.image.url}
+                        alt={item.word}
+                        width={item.image.width}
+                        height={item.image.height}
+                      />
+                    </div>
+
+                    <p className="word">{item.word}</p>
                   </div>
+                ))
+              : post.title}
+          </Link>
+        </div>
 
-                  <p className="word">{item.word}</p>
-                </div>
-              ))
-            : post.title}
-        </Link>
+        <div ref={backgroundRef} className="table-row-background" />
       </div>
-
-      <div ref={backgroundRef} className="table-row-background" />
-    </div>
+    </AnimateOnScroll>
   )
 }
