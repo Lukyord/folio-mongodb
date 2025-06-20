@@ -5,6 +5,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import CategoryList from './CategoryList'
 import AnimateOnScroll from '@/utils/animate-on-scroll'
+import { useTransitionRouter } from 'next-view-transitions'
+import { pageAnimation } from '@/utils/pageAnimation'
 
 interface TableRowProps {
   post: {
@@ -18,6 +20,7 @@ interface TableRowProps {
 }
 
 export default function TableRow({ post }: TableRowProps) {
+  const router = useTransitionRouter()
   const rowRef = useRef<HTMLDivElement>(null)
   const backgroundRef = useRef<HTMLDivElement>(null)
 
@@ -38,22 +41,17 @@ export default function TableRow({ post }: TableRowProps) {
     const rowHeight = rect.height
     const rowCenter = rowTop + rowHeight / 2
 
-    // Determine if mouse entered from top or bottom
     const direction = mouseY < rowCenter ? 'top' : 'bottom'
 
-    // Set initial transform based on direction
     if (direction === 'top') {
       backgroundRef.current.style.transform = 'translateY(-100%)'
     } else {
       backgroundRef.current.style.transform = 'translateY(100%)'
     }
 
-    // Animate to center
-    requestAnimationFrame(() => {
-      if (backgroundRef.current) {
-        backgroundRef.current.style.transform = 'translateY(0)'
-      }
-    })
+    if (backgroundRef.current) {
+      backgroundRef.current.style.transform = 'translateY(0)'
+    }
   }, [])
 
   const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
@@ -65,10 +63,8 @@ export default function TableRow({ post }: TableRowProps) {
     const rowHeight = rect.height
     const rowCenter = rowTop + rowHeight / 2
 
-    // Determine exit direction
     const direction = mouseY < rowCenter ? 'top' : 'bottom'
 
-    // Animate out based on exit direction
     if (direction === 'top') {
       backgroundRef.current.style.transform = 'translateY(-100%)'
     } else {
@@ -78,45 +74,56 @@ export default function TableRow({ post }: TableRowProps) {
 
   return (
     <AnimateOnScroll triggerClass={['fadeInUp', 'in-view']} delay={100}>
-      <div
-        ref={rowRef}
-        className="table-row"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+      <Link
+        href={`/posts/${post.slug}`}
+        onClick={(e) => {
+          e.preventDefault()
+
+          router.push(`/posts/${post.slug}`, {
+            onTransitionReady: pageAnimation,
+          })
+        }}
       >
-        <div className="category">
-          <p>
-            <CategoryList categories={categories} />
-          </p>
-        </div>
+        <div
+          ref={rowRef}
+          className="table-row"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+        >
+          <div className="category">
+            <p>
+              <CategoryList categories={categories} />
+            </p>
+          </div>
 
-        <div className="year">
-          <p>{year}</p>
-        </div>
+          <div className="year">
+            <p>{year}</p>
+          </div>
 
-        <div className="project">
-          <Link href={`/posts/${post.slug}`} className="project-name">
-            {post.projectName && Array.isArray(post.projectName)
-              ? post.projectName.map((item: any, index: number) => (
-                  <div key={index} className="word-item">
-                    <div className="image">
-                      <Image
-                        src={item.image.url}
-                        alt={item.word}
-                        width={item.image.width}
-                        height={item.image.height}
-                      />
+          <div className="project">
+            <div className="project-name">
+              {post.projectName && Array.isArray(post.projectName)
+                ? post.projectName.map((item: any, index: number) => (
+                    <div key={index} className="word-item">
+                      <div className="image">
+                        <Image
+                          src={item.image.url}
+                          alt={item.word}
+                          width={item.image.width}
+                          height={item.image.height}
+                        />
+                      </div>
+
+                      <p className="word">{item.word}</p>
                     </div>
+                  ))
+                : post.title}
+            </div>
+          </div>
 
-                    <p className="word">{item.word}</p>
-                  </div>
-                ))
-              : post.title}
-          </Link>
+          <div ref={backgroundRef} className="table-row-background" />
         </div>
-
-        <div ref={backgroundRef} className="table-row-background" />
-      </div>
+      </Link>
     </AnimateOnScroll>
   )
 }

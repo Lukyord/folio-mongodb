@@ -5,10 +5,20 @@ import { gsap } from 'gsap'
 import { SplitText } from 'gsap/SplitText'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-// Register the plugins
 gsap.registerPlugin(SplitText, ScrollTrigger)
 
-// Custom hook for SplitText functionality with scroll animation
+const waitForFonts = (): Promise<void> => {
+  return new Promise((resolve) => {
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => {
+        setTimeout(resolve, 100)
+      })
+    } else {
+      setTimeout(resolve, 500)
+    }
+  })
+}
+
 export const useSplitText = (
   options: {
     animationClass?: string
@@ -22,46 +32,56 @@ export const useSplitText = (
   useEffect(() => {
     if (!elementRef.current) return
 
-    // Create SplitText instance
-    splitInstanceRef.current = new SplitText(elementRef.current, {
-      type: 'chars, words',
-      charsClass: 'char',
-      wordsClass: 'word',
-      ...options,
-    })
+    const initializeSplitText = async () => {
+      // Wait for fonts to load before initializing SplitText
+      await waitForFonts()
 
-    // Get the characters after splitting
-    const chars = splitInstanceRef.current.chars
+      if (!elementRef.current) return
 
-    // Create ScrollTrigger for each character
-    chars.forEach((char, index) => {
-      const charElement = char as HTMLElement
-      charElement.style.visibility = 'hidden'
-      charElement.classList.add('animate')
-
-      ScrollTrigger.create({
-        trigger: char,
-        start: 'top 80%',
-        onEnter: () => {
-          const staggerDelay = index * (options.staggerDelay || 0.05)
-          setTimeout(() => {
-            charElement.style.visibility = 'visible'
-            charElement.classList.add(options.animationClass || 'char-animated')
-          }, staggerDelay * 1000)
-        },
-        once: true,
+      // Create SplitText instance
+      splitInstanceRef.current = new SplitText(elementRef.current, {
+        type: 'chars, words',
+        charsClass: 'char',
+        wordsClass: 'word',
+        ...options,
       })
-    })
+
+      // Get the characters after splitting
+      const chars = splitInstanceRef.current.chars
+
+      // Create ScrollTrigger for each character
+      chars.forEach((char, index) => {
+        const charElement = char as HTMLElement
+        charElement.style.visibility = 'hidden'
+        charElement.classList.add('animate')
+
+        ScrollTrigger.create({
+          trigger: char,
+          start: 'top 80%',
+          onEnter: () => {
+            const staggerDelay = index * (options.staggerDelay || 0.05)
+            setTimeout(() => {
+              charElement.style.visibility = 'visible'
+              charElement.classList.add(options.animationClass || 'char-animated')
+            }, staggerDelay * 1000)
+          },
+          once: true,
+        })
+      })
+    }
+
+    initializeSplitText()
 
     return () => {
       if (splitInstanceRef.current) {
         splitInstanceRef.current.revert()
       }
+      // Clean up ScrollTriggers
       ScrollTrigger.getAll().forEach((trigger) => {
         if (
           trigger.vars.trigger &&
-          Array.isArray(chars) &&
-          chars.includes(trigger.vars.trigger as Element)
+          splitInstanceRef.current?.chars &&
+          splitInstanceRef.current.chars.includes(trigger.vars.trigger as Element)
         ) {
           trigger.kill()
         }

@@ -7,13 +7,15 @@ import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
 import React, { cache } from 'react'
 import RichText from '@/components/RichText'
+import PostBackButton from '@/components/Post/PostBackButton'
+import AnimateOnScroll from '@/utils/animate-on-scroll'
 
 import type { Post } from '@/payload-types'
 
 import { generateMeta } from '@/utilities/generateMeta'
 import PageClient from './page.client'
 import { LivePreviewListener } from '@/components/LivePreviewListener'
-import Link from 'next/link'
+import { pageAnimationDuration } from '@/utils/pageAnimation'
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
   const posts = await payload.find({
@@ -64,48 +66,55 @@ export default async function Post({ params: paramsPromise }: Args) {
 
             {draft && <LivePreviewListener />}
 
-            <div className="post-header">
-              <Link href="/" className="back-button-link">
-                Back
-              </Link>
+            <AnimateOnScroll triggerClass={['entryUp']} delay={pageAnimationDuration}>
+              <div className="post-header">
+                <PostBackButton />
 
-              <div className="post-ttl">
-                <h1>{post.title}</h1>
-              </div>
+                <div className="post-ttl">
+                  <h1>{post.title}</h1>
+                </div>
 
-              <div className="post-date">
-                <p>
-                  {new Date(post.createdAt).toLocaleDateString('en-US', {
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                </p>
+                <div className="post-date">
+                  <p>
+                    {new Date(post.createdAt).toLocaleDateString('en-US', {
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  </p>
+                </div>
               </div>
-            </div>
+            </AnimateOnScroll>
 
             <div className="content">
-              <div className="post-category">
-                <h2 className="size-h4">{categories}</h2>
-              </div>
+              <AnimateOnScroll triggerClass={['entryUp']} delay={pageAnimationDuration + 200}>
+                <div className="post-category">
+                  <h2 className="size-h4">{categories}</h2>
+                </div>
+              </AnimateOnScroll>
 
-              <div className="post-tags">
-                {post.tags?.map((item) => {
-                  const tag = typeof item === 'string' ? item : item.name
-                  const tagColor = typeof item === 'string' ? item : item.color
+              <AnimateOnScroll triggerClass={['entryUp']} delay={pageAnimationDuration + 400}>
+                <div className="post-tags">
+                  {post.tags?.map((item) => {
+                    const tag = typeof item === 'string' ? item : item.name
+                    const tagColor = typeof item === 'string' ? item : item.color
 
-                  return (
-                    <div
-                      style={{ '--bg': tagColor } as React.CSSProperties}
-                      className="post-tag"
-                      key={tag}
-                    >
-                      <span>{tag}</span>
-                    </div>
-                  )
-                })}
-              </div>
+                    return (
+                      <div
+                        style={{ '--bg': tagColor } as React.CSSProperties}
+                        className="post-tag"
+                        key={tag}
+                      >
+                        <span>{tag}</span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </AnimateOnScroll>
 
-              <RichText data={post.content} enableGutter={false} />
+              <AnimateOnScroll triggerClass={['fadeIn']} delay={pageAnimationDuration + 600}>
+                <RichText data={post.content} enableGutter={false} />
+              </AnimateOnScroll>
+
               {post.relatedPosts && post.relatedPosts.length > 0 && (
                 <RelatedPosts
                   className="mt-12 max-w-[52rem] lg:grid lg:grid-cols-subgrid col-start-1 col-span-3 grid-rows-[2fr]"

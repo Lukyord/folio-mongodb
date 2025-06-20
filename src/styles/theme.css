@@ -504,13 +504,14 @@ html {
   font-size: 62.5%;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: var(--color-black);
 }
 body {
   margin: 0;
   position: relative;
   min-height: 100svh;
   overflow-x: hidden;
-  background: var(--color-off-white);
+  background-color: var(--color-off-white);
   color: var(--color-body);
   -webkit-animation-name: pageAnimation;
   animation-name: pageAnimation;
@@ -2139,6 +2140,19 @@ html.no-touchevents *[class*='swiper-button-']:hover:after {
   opacity: 0;
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 0.6s ease-in-out forwards;
+}
+
 @keyframes fadeInUp {
   0% {
     opacity: 0;
@@ -2152,6 +2166,25 @@ html.no-touchevents *[class*='swiper-button-']:hover:after {
 
 .fadeInUp {
   animation: fadeInUp 2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+@keyframes entryUp {
+  0% {
+    opacity: 0;
+    transform: translateY(5rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entryUp {
+  overflow: hidden;
+}
+
+.entryUp > * {
+  animation: entryUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 .letter-in {
@@ -2305,7 +2338,7 @@ section {
 .container {
   position: relative;
   width: 100%;
-  max-width: 100%;
+  max-width: 100% !important;
   margin-left: auto;
   margin-right: auto;
   padding-left: var(--spacing-container);
@@ -2652,6 +2685,7 @@ section {
   padding: var(--spacing-lg) 0;
   position: relative;
   overflow: hidden;
+  transition: var(--transition);
 }
 
 [data-section='folio'] .table-row:after {
@@ -2665,7 +2699,8 @@ section {
   transition: var(--transition);
 }
 
-[data-section='folio'] .in-view > .table-row:after {
+[data-section='folio'] .in-view > a > .table-row:after,
+[data-section='folio'] .in-view > .table-row.table-header:after {
   width: 100%;
 }
 
@@ -2708,6 +2743,10 @@ section {
   margin-left: var(--spacing-2xs);
 }
 
+/* [data-section='folio'] .table-row.hovered:not(.table-header) .category {
+  margin-left: var(--spacing-2xs);
+} */
+
 [data-section='folio'] .project-name {
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
@@ -2739,6 +2778,11 @@ section {
   margin-right: var(--spacing-3xs);
 }
 
+/* [data-section='folio'] .table-row.hovered:not(.table-header) .word-item .image {
+  width: calc(var(--height) * 1.5);
+  margin-right: var(--spacing-3xs);
+} */
+
 [data-section='folio'] .table-row:not(.table-header) > .table-row-background {
   position: absolute;
   inset: 0;
@@ -2760,6 +2804,18 @@ section {
 [data-section='folio'] .table-row:not(.table-header):hover .category-freelance {
   color: #b86735;
 }
+/* 
+[data-section='folio'] .table-row.hovered:not(.table-header) {
+  color: var(--color-black);
+}
+
+[data-section='folio'] .table-row.hovered:not(.table-header) .category-inhouse {
+  color: #2d6fb5;
+}
+
+[data-section='folio'] .table-row.hovered:not(.table-header) .category-freelance {
+  color: #b86735;
+} */
 
 /* PAGE: POST */
 /* Post */

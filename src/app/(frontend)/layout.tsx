@@ -11,6 +11,7 @@ import '@/styles/theme.css'
 import '@/styles/theme-rwd.css'
 import './globals.css'
 import { getServerSideURL } from '@/utilities/getURL'
+import { ViewTransitions } from 'next-view-transitions'
 
 const NeueBit = localFont({
   src: './fonts/NeueBit/NeueBit-Regular.woff2',
@@ -56,25 +57,27 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   // const { isEnabled } = await draftMode()
 
   return (
-    <html
-      className={`${NeueBit.variable} ${NeueMontreal.variable} ${RusillaSerif.variable}`}
-      lang="en"
-      suppressHydrationWarning
-    >
-      <head>
-        <InitTheme />
-      </head>
-      <body>
-        <Providers>{children}</Providers>
+    <ViewTransitions>
+      <html
+        className={`${NeueBit.variable} ${NeueMontreal.variable} ${RusillaSerif.variable}`}
+        lang="en"
+        suppressHydrationWarning
+      >
+        <head>
+          <InitTheme />
+        </head>
+        <body>
+          <Providers>{children}</Providers>
 
-        <div id="page-message">
-          <p>
-            For the best experience, we recommend viewing the site in portrait orientation on mobile
-            devices.
-          </p>
-        </div>
-      </body>
-    </html>
+          <div id="page-message">
+            <p>
+              For the best experience, we recommend viewing the site in portrait orientation on
+              mobile devices.
+            </p>
+          </div>
+        </body>
+      </html>
+    </ViewTransitions>
   )
 }
 

@@ -27,7 +27,11 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
   }, [headerTheme])
 
   return (
-    <header id="header" {...(theme ? { 'data-theme': theme } : {})}>
+    <header
+      id="header"
+      {...(theme ? { 'data-theme': theme } : {})}
+      data-nextjs-scroll-focus-boundary
+    >
       <div className="header-nav">
         <Link href="/">
           <p>
