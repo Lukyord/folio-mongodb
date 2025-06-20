@@ -7,19 +7,17 @@ import { useState, useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { useScreenSize } from '@/hooks/useScreenSize'
 
-// Helper function to get responsive scales and positions
 const getResponsiveProps = (screenWidth) => {
   if (screenWidth < 768) {
-    // Mobile screens
     return {
-      scales: [1, 0.65, 0.5, 1.5],
+      scales: [1, 1.5, 0.05],
       positions: [0, 0, 0],
       cameraZoom: 400,
     }
   } else {
     return {
-      scales: [1.2, 0.85, 0.7, 1.75],
-      positions: [0, 0, 0],
+      scales: [1.2, 1.75, 0.06],
+      positions: [0, -0.1, 0],
       cameraZoom: 500,
     }
   }
@@ -33,36 +31,8 @@ export default function FloatingShape() {
   const responsiveProps = getResponsiveProps(screenSize.width)
 
   useEffect(() => {
-    const handleMouseMove = (event) => {
-      const x = (event.clientX / window.innerWidth) * 2 - 1
-      const z = (event.clientY / window.innerHeight) * 2 - 1
-
-      gsap.to(position, {
-        x: x,
-        z: z,
-        duration: 5,
-        ease: 'power2.out',
-        onUpdate: () => {
-          flowersRef.current.forEach((flower) => {
-            if (flower) {
-              const targetX = position.x
-              const targetZ = position.z
-
-              flower.position.x += (targetX - flower.position.x) * 0.1
-              flower.position.z += (targetZ - flower.position.z) * 0.1
-            }
-          })
-        },
-      })
-    }
-
-    window.addEventListener('mousemove', handleMouseMove)
-    return () => window.removeEventListener('mousemove', handleMouseMove)
-  }, [position])
-
-  useEffect(() => {
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % 4)
+      setActiveIndex((prev) => (prev + 1) % 3)
     }, 2000)
 
     return () => clearInterval(interval)
@@ -89,7 +59,7 @@ export default function FloatingShape() {
       />
       <Flower
         ref={(el) => (flowersRef.current[1] = el)}
-        modelPath="/3d/flower-pot-bit-2.gltf"
+        modelPath="/3d/flower-poppy.gltf"
         scale={[responsiveProps.scales[1], responsiveProps.scales[1], responsiveProps.scales[1]]}
         position={[
           responsiveProps.positions[0],
@@ -100,7 +70,8 @@ export default function FloatingShape() {
       />
       <Flower
         ref={(el) => (flowersRef.current[2] = el)}
-        modelPath="/3d/flower-pot-bit-3.gltf"
+        modelPath="/3d/flower-bee.gltf"
+        rotation={[Math.PI / -2, 0, 0]}
         scale={[responsiveProps.scales[2], responsiveProps.scales[2], responsiveProps.scales[2]]}
         position={[
           responsiveProps.positions[0],
@@ -109,17 +80,7 @@ export default function FloatingShape() {
         ]}
         visible={activeIndex === 2}
       />
-      <Flower
-        ref={(el) => (flowersRef.current[3] = el)}
-        modelPath="/3d/flower-poppy.gltf"
-        scale={[responsiveProps.scales[3], responsiveProps.scales[3], responsiveProps.scales[3]]}
-        position={[
-          responsiveProps.positions[0],
-          responsiveProps.positions[1],
-          responsiveProps.positions[2],
-        ]}
-        visible={activeIndex === 3}
-      />
+
       <Environment preset="sunset" />
     </Canvas>
   )

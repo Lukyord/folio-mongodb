@@ -20,7 +20,14 @@ function Mesh({ node }) {
 
 const Flower = forwardRef(
   (
-    { modelPath, scale = [1, 1, 1], position = [0, 0, 0], rotationSpeed = 0.3, visible = true },
+    {
+      modelPath,
+      scale = [1, 1, 1],
+      position = [0, 0, 0],
+      rotationSpeed = 0.3,
+      visible = true,
+      rotation = [0, 0, 0],
+    },
     ref,
   ) => {
     const { nodes } = useGLTF(modelPath)
@@ -36,9 +43,11 @@ const Flower = forwardRef(
 
     return (
       <group ref={groupRef} scale={scale} position={position} visible={visible}>
-        {Object.values(nodes).map((node) => (
-          <Mesh key={node.id} node={node} />
-        ))}
+        <group rotation={rotation}>
+          {Object.values(nodes).map((node) => (
+            <Mesh key={node.id} node={node} />
+          ))}
+        </group>
       </group>
     )
   },

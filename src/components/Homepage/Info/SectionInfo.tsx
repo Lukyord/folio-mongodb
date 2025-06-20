@@ -10,7 +10,7 @@ export default function SectionInfo() {
   return (
     <section data-section="info">
       <div className="sc-billboard full-screen">
-        <Background3d />
+        {/* <Background3d /> */}
 
         <div className="content">
           <SplitTextComponent as="h1" enableScrollAnimation={true} animationClass="letter-in">
