@@ -2543,6 +2543,47 @@ section {
 
 /* PAGE */
 /* PAGE: INDEX */
+/* Intro */
+.intro-container {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  pointer-events: none;
+}
+
+.intro-banner {
+  position: absolute;
+  top: 0;
+  width: 25%;
+  height: 100%;
+  background-color: var(--color-black);
+  transition: var(--duration-x3) cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.intro-banner.active {
+  transform: translateY(100%);
+}
+
+.intro-banner[data-intro-banner='1'] {
+  left: 0;
+  transition-delay: 0s;
+}
+
+.intro-banner[data-intro-banner='2'] {
+  left: 25%;
+  transition-delay: 0.25s;
+}
+
+.intro-banner[data-intro-banner='3'] {
+  left: 50%;
+  transition-delay: 0.5s;
+}
+
+.intro-banner[data-intro-banner='4'] {
+  left: 75%;
+  transition-delay: 0.75s;
+}
+
 /* Floating Shape */
 [data-section='floating-shape'] {
   width: 100%;
