@@ -1,9 +1,14 @@
 'use client'
 
 import React from 'react'
-import { SplitTextComponent } from '../../../utils/splitText'
-import { useHeaderScrollClass } from '../../../utils/useHeaderScrollClass'
+import { SplitTextComponent } from '@/utils/splitText'
+import { useHeaderScrollClass } from '@/utils/useHeaderScrollClass'
+import Image from 'next/image'
 import AnimateOnScroll from '@/utils/animate-on-scroll'
+import blob1 from '@public/media/blob-1.webp'
+import blob2 from '@public/media/blob-2.webp'
+import blob3 from '@public/media/blob-3.webp'
+import blob4 from '@public/media/blob-4.webp'
 
 export default function SectionInfo() {
   useHeaderScrollClass()
@@ -15,25 +20,25 @@ export default function SectionInfo() {
 
         <div className="blob" data-blob="1">
           <AnimateOnScroll triggerClass="fadeInUp">
-            <img src="/media/blob-1.webp" alt="blob" width={1000} height={1000} />
+            <Image src={blob1} alt="blob" width={1000} height={1000} />
           </AnimateOnScroll>
         </div>
 
         <div className="blob" data-blob="2">
           <AnimateOnScroll triggerClass="fadeInUp" delay={250}>
-            <img src="/media/blob-2.webp" alt="blob" width={1000} height={1000} />
+            <Image src={blob2} alt="blob" width={1000} height={1000} />
           </AnimateOnScroll>
         </div>
 
         <div className="blob" data-blob="3">
           <AnimateOnScroll triggerClass="fadeInUp" delay={500}>
-            <img src="/media/blob-3.webp" alt="blob" width={1000} height={1000} />
+            <Image src={blob3} alt="blob" width={1000} height={1000} />
           </AnimateOnScroll>
         </div>
 
         <div className="blob" data-blob="4">
           <AnimateOnScroll triggerClass="fadeInUp" delay={750}>
-            <img src="/media/blob-4.webp" alt="blob" width={1000} height={1000} />
+            <Image src={blob4} alt="blob" width={1000} height={1000} />
           </AnimateOnScroll>
         </div>
 
