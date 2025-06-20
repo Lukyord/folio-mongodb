@@ -4,6 +4,7 @@ import SectionFolio from '@/components/Homepage/Folio/SectionFolio'
 import { Header } from '@/Header/Component'
 import AnimateOnScroll from '@/utils/animate-on-scroll'
 import { pageAnimationDuration } from '@/utils/pageAnimation'
+import BlocksHover from '@/components/Homepage/FloatingShape/BlocksHover'
 // import PageTemplate, { generateMetadata } from './[slug]/page'
 
 export default function Home() {
@@ -11,11 +12,10 @@ export default function Home() {
     <>
       <Header />
       <main className="index-main">
-        <AnimateOnScroll triggerClass={['entryUp']} delay={pageAnimationDuration}>
-          <section data-section="floating-shape">
-            <FloatingShape />
-          </section>
-        </AnimateOnScroll>
+        <section data-section="floating-shape">
+          <BlocksHover />
+          <FloatingShape />
+        </section>
 
         <SectionInfo />
 
