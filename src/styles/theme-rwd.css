@@ -138,6 +138,10 @@
     margin-right: 0;
   }
 
+  [data-section='folio'] .table-row:not(.table-header) > .table-row-background {
+    display: none;
+  }
+
   /* PAGE: POST */
   /* Post */
   [data-section='post'] .post-header {
