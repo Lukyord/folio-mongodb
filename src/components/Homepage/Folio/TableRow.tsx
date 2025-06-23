@@ -32,45 +32,74 @@ export default function TableRow({ post }: TableRowProps) {
       : (post.categories as any)?.title || 'Unknown'
     : 'Uncategorized'
 
-  const handleMouseEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!rowRef.current || !backgroundRef.current) return
+  const getDirection = useCallback((clientY: number) => {
+    if (!rowRef.current) return 'bottom'
 
     const rect = rowRef.current.getBoundingClientRect()
-    const mouseY = e.clientY
-    const rowTop = rect.top
-    const rowHeight = rect.height
-    const rowCenter = rowTop + rowHeight / 2
+    const rowCenter = rect.top + rect.height / 2
+    return clientY < rowCenter ? 'top' : 'bottom'
+  }, [])
 
-    const direction = mouseY < rowCenter ? 'top' : 'bottom'
+  const animateBackground = useCallback((direction: 'top' | 'bottom', show: boolean) => {
+    if (!backgroundRef.current) return
 
-    if (direction === 'top') {
-      backgroundRef.current.style.transform = 'translateY(-100%)'
-    } else {
-      backgroundRef.current.style.transform = 'translateY(100%)'
-    }
-
-    if (backgroundRef.current) {
+    if (show) {
       backgroundRef.current.style.transform = 'translateY(0)'
-    }
-  }, [])
-
-  const handleMouseLeave = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!rowRef.current || !backgroundRef.current) return
-
-    const rect = rowRef.current.getBoundingClientRect()
-    const mouseY = e.clientY
-    const rowTop = rect.top
-    const rowHeight = rect.height
-    const rowCenter = rowTop + rowHeight / 2
-
-    const direction = mouseY < rowCenter ? 'top' : 'bottom'
-
-    if (direction === 'top') {
-      backgroundRef.current.style.transform = 'translateY(-100%)'
     } else {
-      backgroundRef.current.style.transform = 'translateY(100%)'
+      backgroundRef.current.style.transform =
+        direction === 'top' ? 'translateY(-100%)' : 'translateY(100%)'
     }
   }, [])
+
+  const handleEnter = useCallback(
+    (clientY: number) => {
+      const direction = getDirection(clientY)
+      animateBackground(direction, true)
+    },
+    [getDirection, animateBackground],
+  )
+
+  const handleLeave = useCallback(
+    (clientY: number) => {
+      const direction = getDirection(clientY)
+      animateBackground(direction, false)
+    },
+    [getDirection, animateBackground],
+  )
+
+  const handleMouseEnter = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      handleEnter(e.clientY)
+    },
+    [handleEnter],
+  )
+
+  const handleMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      handleLeave(e.clientY)
+    },
+    [handleLeave],
+  )
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      const touch = e.touches[0]
+      if (touch) {
+        handleEnter(touch.clientY)
+      }
+    },
+    [handleEnter],
+  )
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      const touch = e.changedTouches[0]
+      if (touch) {
+        handleLeave(touch.clientY)
+      }
+    },
+    [handleLeave],
+  )
 
   return (
     <AnimateOnScroll triggerClass={['fadeInUp', 'in-view']} delay={100}>
@@ -89,6 +118,8 @@ export default function TableRow({ post }: TableRowProps) {
           className="table-row"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <div className="category">
             <p>
