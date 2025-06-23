@@ -106,6 +106,10 @@
   }
 
   /* Folio */
+  [data-section='folio'] .table-row:not(.table-header):hover {
+    color: var(--color-white);
+  }
+
   [data-section='folio'] .table-row .category {
     width: 0;
     overflow: hidden;

@@ -2828,10 +2828,6 @@ section {
   margin-left: var(--spacing-2xs);
 }
 
-/* [data-section='folio'] .table-row.hovered:not(.table-header) .category {
-  margin-left: var(--spacing-2xs);
-} */
-
 [data-section='folio'] .project-name {
   font-size: var(--font-size-h1);
   line-height: var(--line-height-h1);
@@ -2863,11 +2859,6 @@ section {
   margin-right: var(--spacing-3xs);
 }
 
-/* [data-section='folio'] .table-row.hovered:not(.table-header) .word-item .image {
-  width: calc(var(--height) * 1.5);
-  margin-right: var(--spacing-3xs);
-} */
-
 [data-section='folio'] .table-row:not(.table-header) > .table-row-background {
   position: absolute;
   inset: 0;
@@ -2889,18 +2880,6 @@ section {
 [data-section='folio'] .table-row:not(.table-header):hover .category-freelance {
   color: #b86735;
 }
-/* 
-[data-section='folio'] .table-row.hovered:not(.table-header) {
-  color: var(--color-black);
-}
-
-[data-section='folio'] .table-row.hovered:not(.table-header) .category-inhouse {
-  color: #2d6fb5;
-}
-
-[data-section='folio'] .table-row.hovered:not(.table-header) .category-freelance {
-  color: #b86735;
-} */
 
 /* PAGE: POST */
 /* Post */

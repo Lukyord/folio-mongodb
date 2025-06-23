@@ -81,26 +81,6 @@ export default function TableRow({ post }: TableRowProps) {
     [handleLeave],
   )
 
-  const handleTouchStart = useCallback(
-    (e: React.TouchEvent<HTMLDivElement>) => {
-      const touch = e.touches[0]
-      if (touch) {
-        handleEnter(touch.clientY)
-      }
-    },
-    [handleEnter],
-  )
-
-  const handleTouchEnd = useCallback(
-    (e: React.TouchEvent<HTMLDivElement>) => {
-      const touch = e.changedTouches[0]
-      if (touch) {
-        handleLeave(touch.clientY)
-      }
-    },
-    [handleLeave],
-  )
-
   return (
     <AnimateOnScroll triggerClass={['fadeInUp', 'in-view']} delay={100}>
       <Link
@@ -118,8 +98,6 @@ export default function TableRow({ post }: TableRowProps) {
           className="table-row"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
         >
           <div className="category">
             <p>
