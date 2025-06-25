@@ -2890,7 +2890,7 @@ section {
 /* PAGE: POST */
 /* Post */
 [data-section='post'] .post-header {
-  --small-width: min(20%, 10rem);
+  --small-width: max(20%, 13rem);
   display: flex;
   justify-content: space-between;
   align-items: center;

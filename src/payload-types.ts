@@ -261,7 +261,7 @@ export interface Post {
   /**
    * Date when this post was created
    */
-  createdAt: string;
+  postCreatedTime?: string | null;
   /**
    * Toggle to show or hide this post from public view
    */
@@ -276,6 +276,7 @@ export interface Post {
   slug?: string | null;
   slugLock?: boolean | null;
   updatedAt: string;
+  createdAt: string;
   _status?: ('draft' | 'published') | null;
 }
 /**
@@ -1188,7 +1189,7 @@ export interface PostsSelect<T extends boolean = true> {
         description?: T;
       };
   publishedAt?: T;
-  createdAt?: T;
+  postCreatedTime?: T;
   isVisible?: T;
   authors?: T;
   populatedAuthors?:
@@ -1200,6 +1201,7 @@ export interface PostsSelect<T extends boolean = true> {
   slug?: T;
   slugLock?: T;
   updatedAt?: T;
+  createdAt?: T;
   _status?: T;
 }
 /**

@@ -242,7 +242,7 @@ export const Posts: CollectionConfig<'posts'> = {
       },
     },
     {
-      name: 'createdAt',
+      name: 'postCreatedTime',
       type: 'date',
       admin: {
         date: {

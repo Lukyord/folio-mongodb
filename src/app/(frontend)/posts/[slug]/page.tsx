@@ -76,10 +76,12 @@ export default async function Post({ params: paramsPromise }: Args) {
 
                 <div className="post-date">
                   <p>
-                    {new Date(post.createdAt).toLocaleDateString('en-US', {
-                      month: 'long',
-                      year: 'numeric',
-                    })}
+                    {post.postCreatedTime
+                      ? new Date(post.postCreatedTime).toLocaleDateString('en-US', {
+                          month: 'long',
+                          year: 'numeric',
+                        })
+                      : 'No date available'}
                   </p>
                 </div>
               </div>

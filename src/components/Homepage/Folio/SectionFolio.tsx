@@ -21,7 +21,7 @@ export default async function SectionFolio() {
       slug: true,
       categories: true,
       tags: true,
-      createdAt: true,
+      postCreatedTime: true,
       publishedAt: true,
       projectName: true,
       meta: true,

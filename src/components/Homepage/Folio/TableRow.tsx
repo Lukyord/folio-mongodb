@@ -14,7 +14,7 @@ interface TableRowProps {
     title: string
     slug?: string | null | undefined
     categories?: any
-    createdAt?: string | null | undefined
+    postCreatedTime?: string | null | undefined
     projectName: any
   }
 }
@@ -24,7 +24,7 @@ export default function TableRow({ post }: TableRowProps) {
   const rowRef = useRef<HTMLDivElement>(null)
   const backgroundRef = useRef<HTMLDivElement>(null)
 
-  const year = post.createdAt ? new Date(post.createdAt).getFullYear() : 'Unknown'
+  const year = post.postCreatedTime ? new Date(post.postCreatedTime).getFullYear() : 'Unknown'
 
   const categories = post.categories
     ? Array.isArray(post.categories)
