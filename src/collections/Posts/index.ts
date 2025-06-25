@@ -6,6 +6,7 @@ import {
   HeadingFeature,
   HorizontalRuleFeature,
   InlineToolbarFeature,
+  LinkFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
 
@@ -127,6 +128,22 @@ export const Posts: CollectionConfig<'posts'> = {
                     FixedToolbarFeature(),
                     InlineToolbarFeature(),
                     HorizontalRuleFeature(),
+                    LinkFeature({
+                      fields: ({ defaultFields }) => [
+                        ...defaultFields,
+                        {
+                          name: 'rel',
+                          label: 'Rel Attribute',
+                          type: 'select',
+                          hasMany: true,
+                          options: ['noopener', 'noreferrer', 'nofollow'],
+                          admin: {
+                            description:
+                              'The rel attribute defines the relationship between a linked resource and the current document. This is a custom link field.',
+                          },
+                        },
+                      ],
+                    }),
                   ]
                 },
               }),
