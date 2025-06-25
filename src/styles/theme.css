@@ -1174,6 +1174,12 @@ html.no-touchevents .lang ul > li > a:not(.active):hover {
   margin-right: auto;
 }
 
+.entry-content picture *:is(img, video) {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 /* HAMBURGER ====================*/
 .hamburger {
   position: relative;
