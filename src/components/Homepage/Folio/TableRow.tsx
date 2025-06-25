@@ -120,6 +120,7 @@ export default function TableRow({ post }: TableRowProps) {
                           alt={item.word}
                           width={item.image.width}
                           height={item.image.height}
+                          priority
                         />
                       </div>
 
