@@ -16,6 +16,7 @@ export default async function SectionFolio() {
         equals: true,
       },
     },
+    sort: '-postCreatedTime',
     select: {
       title: true,
       slug: true,
