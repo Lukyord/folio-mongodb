@@ -44,7 +44,7 @@ export default function SectionInfo() {
           </SplitTextComponent>
 
           <SplitTextComponent as="p" enableScrollAnimation={true} animationClass="letter-in">
-            <span className="font-bit">C</span>r<span className="font-bit">ea</span>ative Fr
+            <span className="font-bit">C</span>r<span className="font-bit">ea</span>tive Fr
             <span className="font-bit">on</span>t<span className="font-bit">end</span> De
             <span className="font-bit">v</span>elo<span className="font-bit">p</span>e
             <span className="font-bit">r</span>
