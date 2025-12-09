@@ -113,9 +113,9 @@ export default async function Post({ params: paramsPromise }: Args) {
                 </div>
               </AnimateOnScroll>
 
-              {/* <AnimateOnScroll triggerClass={['fadeIn']} delay={pageAnimationDuration + 600}> */}
-              <RichText data={post.content} enableGutter={false} />
-              {/* </AnimateOnScroll> */}
+              <AnimateOnScroll triggerClass={['fadeIn']} delay={pageAnimationDuration + 600}>
+                <RichText data={post.content} enableGutter={false} />
+              </AnimateOnScroll>
 
               {post.relatedPosts && post.relatedPosts.length > 0 && (
                 <RelatedPosts

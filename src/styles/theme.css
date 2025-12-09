@@ -1024,6 +1024,7 @@ html.no-touchevents .lang ul > li > a:not(.active):hover {
   --gap-column: var(--spacing-sm);
   --gap-content: var(--spacing-sm);
   width: 100%;
+  color: var(--color-body-black);
 }
 .entry-content :is(h1, h2, h3, h4, h5, h6) {
   margin: 0;
@@ -1071,6 +1072,9 @@ html.no-touchevents .lang ul > li > a:not(.active):hover {
   line-height: var(--line-height-body);
   letter-spacing: normal;
   color: inherit;
+}
+.entry-content .strong {
+  color: var(--color-body-black) !important;
 }
 .entry-content a {
   color: var(--color-theme);
